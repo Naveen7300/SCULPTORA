@@ -1,4 +1,4 @@
-# sculptora
+# SCULPTORA
 
 || EXQUISITE CARE FOR EVERY PIECE YOU WEAR ||
 
