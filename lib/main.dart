@@ -18,6 +18,100 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Create a separate function for the AppBar
+PreferredSizeWidget _customAppBar(BuildContext context) {
+  return AppBar(
+    toolbarHeight: 80,
+    backgroundColor: Colors.lightBlue[300],
+    leading: IconButton(
+      icon: Icon(Icons.arrow_back),
+      onPressed: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()));  // Navigates back to the previous page
+      },
+    ),
+    title: Row(
+      children: [
+        Container(
+          width: 70,
+          height: 70,
+          padding: EdgeInsets.only(right: 10),
+          child: Center(
+              child: Image(
+                image: AssetImage('assets/Sculptora_Logo.png'),
+              )
+          ),
+        ),
+        SizedBox(width: 5),
+        Padding(
+          padding: EdgeInsets.only(top: 15), // Add top & right padding
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                  'SCULPTORA',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 32
+                  )
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+    actions: [
+      PopupMenuButton(
+        icon: Icon(Icons.menu),
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            child: Text('Profile'),
+            value: 'profile',
+          ),
+          PopupMenuItem(
+            child: Text('Orders'),
+            value: 'orders',
+          ),
+          PopupMenuItem(
+            child: Text('About Us'),
+            value: 'about',
+          ),
+          PopupMenuItem(
+            child: Text('Contact'),
+            value: 'contact',
+          ),
+        ],
+        onSelected: (value) {
+          if (value == 'profile') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ProfilePage()),
+            );
+          } else if (value == 'orders') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => OrdersPage()),
+            );
+          } else if (value == 'about') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => AboutUsPage()),
+            );
+          } else if (value == 'contact') {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ContactPage()),
+            );
+          }
+        },
+      ),
+    ],
+  );
+}
+
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -326,50 +420,18 @@ class _SignupPageState extends State<SignupPage> {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 80,
-        backgroundColor: Colors.lightBlue[300],
-        title: Row(
-          children: [
-            Container(
-              width: 70,
-              height: 70,
-              padding: EdgeInsets.only(right: 10),
-              child: Center(
-                child: Image(
-                  image: AssetImage('assets/Sculptora_Logo.png'),
-                )
-              ),
-            ),
-            SizedBox(width: 5),
-            Padding(
-              padding: EdgeInsets.only(top: 15), // Add top & right padding
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                      'SCULPTORA',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32
-                      )
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          Icon(Icons.menu, color: Colors.black),
-          SizedBox(width: 30, height: 20),
-        ],
-      ),
+      appBar: _customAppBar(context),
       body: Container(
         color: Colors.lightBlue[100],
         child: Center( // Center content vertically
@@ -378,12 +440,20 @@ class HomePage extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
             children: [
               _buildLaundryButton(context, "LAUNDRY", () {
-                print("Button Pressed 1");
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LaundryPage()));
               }),
-              _buildTailringButton(context, "TAILORING", () {
+              _buildTailoringButton(context, "TAILORING", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TailoringPage()));
                 print("Button Pressed 2");
               }),
               _buildSneakLeanButton(context, "SNEAKLEAN", () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SneakleanPage()));
                 print("Button Pressed 3");
               }),
             ],
@@ -440,7 +510,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildTailringButton(BuildContext context, String buttonText, VoidCallback onPressed) {
+  Widget _buildTailoringButton(BuildContext context, String buttonText, VoidCallback onPressed) {
     return Padding(
       padding: EdgeInsets.only(bottom: 20.0), // Add bottom padding between buttons
       child: ClipRRect(
@@ -534,3 +604,198 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "PROFILE",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 32,
+              fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class OrdersPage extends StatefulWidget {
+  @override
+  _OrdersPageState createState() => _OrdersPageState();
+}
+
+class _OrdersPageState extends State<OrdersPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "ORDERS",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class AboutUsPage extends StatefulWidget {
+  @override
+  _AboutUsPageState createState() => _AboutUsPageState();
+}
+
+class _AboutUsPageState extends State<AboutUsPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "ABOUT US",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ContactPage extends StatefulWidget {
+  @override
+  _ContactPageState createState() => _ContactPageState();
+}
+
+class _ContactPageState extends State<ContactPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "CONTACT",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LaundryPage extends StatefulWidget {
+  @override
+  _LaundryPageState createState() => _LaundryPageState();
+}
+
+class _LaundryPageState extends State<LaundryPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "LAUNDRY",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TailoringPage extends StatefulWidget {
+  @override
+  _TailoringPageState createState() => _TailoringPageState();
+}
+
+class _TailoringPageState extends State<TailoringPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "TAILORING",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SneakleanPage extends StatefulWidget {
+  @override
+  _SneakleanPageState createState() => _SneakleanPageState();
+}
+
+class _SneakleanPageState extends State<SneakleanPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _customAppBar(context),
+      body: Container(
+        color: Colors.lightBlue[100],
+        child: Center(
+          child: Text(
+            "SNEAKLEAN",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 32,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+      ),
+    );
+  }
