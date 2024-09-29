@@ -799,3 +799,4 @@ class _SneakleanPageState extends State<SneakleanPage> {
       ),
     );
   }
+}
