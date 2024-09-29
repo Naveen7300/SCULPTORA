@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Login/Signup App',
+      title: 'SCULPTORA',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -30,51 +31,63 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(20.0),
-              color: Colors.green[400],
-              child: Text(
-                "LOGO",
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+      backgroundColor: Colors.lightBlue[100],
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Image(
+                      image: AssetImage('assets/Sculptora_Logo.png'),
+                    )),
+                //SizedBox(height: 20.0),
+                Text(
+                  "SCULPTORA",
+                  style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold),
                 ),
-              ),
+                Text(
+                  "EXQUISITE CARE FOR EVERY PIECE YOU WEAR",
+                  style: TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 85),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      _buildTextField("EMAIL"),
+                      SizedBox(height: 20.0),
+                      _buildTextField("PASSWORD"),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 40.0),
+                _buildButton("LOGIN", () {
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
+                    // Call your login API here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  }
+                }),
+                SizedBox(height: 20.0),
+                // Removed TextButton from here
+              ],
             ),
-            SizedBox(height: 20.0),
-            Text(
-              "NAME AND TAG LINE",
-              style: TextStyle(fontSize: 16.0),
-            ),
-            SizedBox(height: 40.0),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  _buildTextField("EMAIL"),
-                  SizedBox(height: 20.0),
-                  _buildTextField("PASSWORD"),
-                ],
-              ),
-            ),
-            SizedBox(height: 40.0),
-            _buildButton("LOGIN", () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                // Call your login API here
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
-              }
-            }),
-            SizedBox(height: 20.0),
-            TextButton(
+          ),
+          Positioned( // Position the TextButton at the bottom
+            bottom: 20.0,
+            left: 0,
+            right: 0,
+            child: TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -83,8 +96,8 @@ class _LoginPageState extends State<LoginPage> {
               },
               child: Text("DON'T HAVE AN ACCOUNT? SIGNUP"),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -123,19 +136,36 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildButton(String label, VoidCallback onPressed) {
     return Container(
-      width: 300.0,
+      width: 200.0,
       padding: EdgeInsets.symmetric(horizontal: 20.0),
-      decoration: BoxDecoration(
-        color: Colors.green[400],
-        borderRadius: BorderRadius.circular(25.0),
-      ),
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(
-          label,
-          style: TextStyle(color: Colors.white),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.green[400],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30), // No rounded corners
+          ),
+          padding: EdgeInsets.zero, // Remove default padding
         ),
-      ),
+        child: Center(
+          child: Text(
+            "LOGIN",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white, // Text color over the image
+              shadows: [
+                Shadow(
+                  offset: Offset(1.0, 1.0),
+                  // Shadow for better readability
+                  blurRadius: 3.0,
+                  color: Colors.black,
+                ),
+              ],
+            ),
+          ),
+        ),
+      )
     );
   }
 }
@@ -156,51 +186,67 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: EdgeInsets.all(20.0),
-              color: Colors.green[400],
-              child: Text(
-                "LOGO",
-                style: TextStyle(
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.bold,
+      backgroundColor: Colors.lightBlue[100],
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 20.0),
+                    child: Image(
+                      image: AssetImage('assets/Sculptora_Logo.png'),
+                      height: 200,
+                      width: 200,
+                    )
                 ),
+                //SizedBox(height: 20.0),
+                Text(
+                  "SCULPTORA",
+                  style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "EXQUISITE CARE FOR EVERY PIECE YOU WEAR",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 40.0),
+                _buildTextField("FULL NAME"),
+                SizedBox(height: 20.0),
+                _buildTextField("PHONE NO."),
+                SizedBox(height: 20.0),
+                _buildTextField("EMAIL"),
+                SizedBox(height: 20.0),
+                _buildTextField("PASSWORD"),
+                SizedBox(height: 20.0),
+                _buildTextField("CONFIRM PASSWORD"),
+                SizedBox(height: 40.0),
+                _buildButton("SIGNUP", () {}),
+                SizedBox(height: 80)
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                  );
+                },
+                child: Text("ALREADY HAVE AN ACCOUNT? LOGIN"),
               ),
             ),
-            SizedBox(height: 20.0),
-            Text(
-              "NAME AND TAG LINE",
-              style: TextStyle(fontSize: 16.0),
-            ),
-            SizedBox(height: 40.0),
-            _buildTextField("FULL NAME"),
-            SizedBox(height: 20.0),
-            _buildTextField("PHONE NO."),
-            SizedBox(height: 20.0),
-            _buildTextField("EMAIL"),
-            SizedBox(height: 20.0),
-            _buildTextField("PASSWORD"),
-            SizedBox(height: 20.0),
-            _buildTextField("CONFIRM PASSWORD"),
-            SizedBox(height: 40.0),
-            _buildButton("SIGNUP", () {}),
-            SizedBox(height: 20.0),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
-              child: Text("ALREADY HAVE AN ACCOUNT? LOGIN"),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -246,19 +292,36 @@ class _SignupPageState extends State<SignupPage> {
 
   Widget _buildButton(String label, VoidCallback onPressed) {
     return Container(
-      width: 300.0,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      decoration: BoxDecoration(
-        color: Colors.green[400],
-        borderRadius: BorderRadius.circular(25.0),
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(
-          label,
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
+        width: 200.0,
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green[400],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30), // No rounded corners
+            ),
+            padding: EdgeInsets.zero, // Remove default padding
+          ),
+          child: Center(
+            child: Text(
+              "SIGNUP",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // Text color over the image
+                shadows: [
+                  Shadow(
+                    offset: Offset(1.0, 1.0),
+                    // Shadow for better readability
+                    blurRadius: 3.0,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        )
     );
   }
 }
@@ -268,95 +331,204 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        toolbarHeight: 80,
+        backgroundColor: Colors.lightBlue[300],
         title: Row(
           children: [
             Container(
-              width: 50,
-              height: 50,
-              color: Colors.green,
-              child: Center(child: Text('LOGO', style: TextStyle(color: Colors.black))),
+              width: 70,
+              height: 70,
+              padding: EdgeInsets.only(right: 10),
+              child: Center(
+                child: Image(
+                  image: AssetImage('assets/Sculptora_Logo.png'),
+                )
+              ),
             ),
-            SizedBox(width: 20),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('NAME', style: TextStyle(color: Colors.black)),
-                Text('TAG LINE', style: TextStyle(color: Colors.black)),
-              ],
+            SizedBox(width: 5),
+            Padding(
+              padding: EdgeInsets.only(top: 15), // Add top & right padding
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                      'SCULPTORA',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 32
+                      )
+                  ),
+                ],
+              ),
             ),
           ],
         ),
         actions: [
           Icon(Icons.menu, color: Colors.black),
-          SizedBox(width: 10),
+          SizedBox(width: 30, height: 20),
         ],
       ),
       body: Container(
-        color: Colors.blue[100], // Light blue background color
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildButton(context, "LAUNDRY", (){
-              print("Button Pressed");
-            }),
-            _buildButton(context, "TAILORING", (){
-              print("Button Pressed");
-            }),
-            _buildButton(context, "SNEAKLEAN", (){
-              print("Button Pressed");
-            })
-          ],
+        color: Colors.lightBlue[100],
+        child: Center( // Center content vertically
+          child: ListView( // Use ListView for scrollable content
+            shrinkWrap: true, // Shrink ListView to content size
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
+            children: [
+              _buildLaundryButton(context, "LAUNDRY", () {
+                print("Button Pressed 1");
+              }),
+              _buildTailringButton(context, "TAILORING", () {
+                print("Button Pressed 2");
+              }),
+              _buildSneakLeanButton(context, "SNEAKLEAN", () {
+                print("Button Pressed 3");
+              }),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildButton(BuildContext context, String title, VoidCallback onPressed) {
+  Widget _buildLaundryButton(BuildContext context, String buttonText, VoidCallback onPressed) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 30.0),
-      child: SizedBox(
-        width: double.infinity, // Full width
-        height: 100, // Fixed height for rectangular shape
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                image: const DecorationImage(
-                  image: AssetImage('assets/laundry.png'), // Background image
-                  fit: BoxFit.cover, // Make the image cover the entire button
+      padding: EdgeInsets.only(bottom: 20.0), // Add bottom padding between buttons
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Adjusted blur
+          child: Container(
+            height: 230,
+            decoration: BoxDecoration(
+              image: DecorationImage( // Use DecorationImage for background
+                image: AssetImage('assets/laundry.png'),
+                fit: BoxFit.cover, // Cover the entire container
+                colorFilter: ColorFilter.mode(// Apply color filter to image
+                  Colors.black.withOpacity(0.55), // Adjust opacity as needed
+                  BlendMode.dstATop,
                 ),
-                borderRadius: BorderRadius.circular(0), // No rounded corners
+              ),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all( // Add border
+                color: Colors.black, // Border color
+                width: 5, // Border thickness
               ),
             ),
-            ElevatedButton(
-              onPressed: onPressed,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent, // Transparent button background
-                shadowColor: Colors.transparent, // Remove button shadow
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(0), // No rounded corners
-                ),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
               ),
-              child: Center(
+              onPressed: onPressed,
+              child: Center( // Center the text
                 child: Text(
-                  title,
+                  buttonText,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 24,
+                    color: Colors.black, // Text color for better contrast
+                    fontSize: 65,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white, // Text color over the image
-                    shadows: [
-                      Shadow(
-                        offset: Offset(1.0, 1.0), // Shadow for better readability
-                        blurRadius: 3.0,
-                        color: Colors.black,
-                      ),
-                    ],
                   ),
                 ),
               ),
             ),
-          ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTailringButton(BuildContext context, String buttonText, VoidCallback onPressed) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.0), // Add bottom padding between buttons
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Adjusted blur
+          child: Container(
+            height: 230,
+            decoration: BoxDecoration(
+              image: DecorationImage( // Use DecorationImage for background
+                image: AssetImage('assets/Tailoring.png'),
+                fit: BoxFit.cover, // Cover the entire container
+                colorFilter: ColorFilter.mode(// Apply color filter to image
+                  Colors.black.withOpacity(0.5), // Adjust opacity as needed
+                  BlendMode.dstATop,
+                ),
+              ),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all( // Add border
+                color: Colors.black, // Border color
+                width: 5, // Border thickness
+              ),
+            ),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+              ),
+              onPressed: onPressed,
+              child: Center( // Center the text
+                child: Text(
+                  buttonText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black, // Text color for better contrast
+                    fontSize: 65,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSneakLeanButton(BuildContext context, String buttonText, VoidCallback onPressed) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 20.0), // Add bottom padding between buttons
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(30),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), // Adjusted blur
+          child: Container(
+            height: 230,
+            decoration: BoxDecoration(
+              image: DecorationImage( // Use DecorationImage for background
+                image: AssetImage('assets/Sneaklean.png'),
+                fit: BoxFit.cover, // Cover the entire container
+                colorFilter: ColorFilter.mode(// Apply color filter to image
+                  Colors.black.withOpacity(0.55), // Adjust opacity as needed
+                  BlendMode.dstATop,
+                ),
+              ),
+              borderRadius: BorderRadius.circular(30),
+              border: Border.all( // Add border
+                color: Colors.black, // Border color
+                width: 5, // Border thickness
+              ),
+            ),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+              ),
+              onPressed: onPressed,
+              child: Center( // Center the text
+                child: Text(
+                  buttonText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black, // Text color for better contrast
+                    fontSize: 65,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
         ),
       ),
     );
