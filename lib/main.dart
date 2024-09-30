@@ -9,15 +9,32 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SCULPTORA',
+      navigatorKey: NavigationService.navigatorKey,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: LoginPage(),
     );
+  }
+}
+
+class NavigationService {
+  static final GlobalKey<NavigatorState> _navigatorKey = GlobalKey<NavigatorState>();
+  static String _currentRoute = '/';
+
+  static GlobalKey<NavigatorState> get navigatorKey => _navigatorKey;
+
+  static void setCurrentRoute(String route) {
+    _currentRoute = route;
+  }
+
+  static String getCurrentRoute() {
+    return _currentRoute;
   }
 }
 
@@ -29,9 +46,19 @@ PreferredSizeWidget _customAppBar(BuildContext context) {
     leading: IconButton(
       icon: Icon(Icons.arrow_back),
       onPressed: () {
-        Navigator.push(
+        if (NavigationService.getCurrentRoute() == '/HomePage') {
+          // If on HomePage, navigate to LoginPage
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => HomePage()));  // Navigates back to the previous page
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
+        } else if (NavigationService.getCurrentRoute() != '/HomePage'){
+          // If on any other page, navigate to HomePage
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        }
       },
     ),
     title: Row(
@@ -124,6 +151,12 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
+
+  @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/LoginPage');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -281,6 +314,12 @@ class _SignupPageState extends State<SignupPage> {
   String _verifyPass = '';
 
   @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/SignUpPage');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.lightBlue[100],
@@ -430,6 +469,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/HomePage');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -615,6 +660,12 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/ProfilePage');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _customAppBar(context),
@@ -642,6 +693,12 @@ class OrdersPage extends StatefulWidget {
 }
 
 class _OrdersPageState extends State<OrdersPage> {
+  @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/OrdersPage');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -671,6 +728,12 @@ class AboutUsPage extends StatefulWidget {
 
 class _AboutUsPageState extends State<AboutUsPage> {
   @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/AboutUsPage');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _customAppBar(context),
@@ -698,6 +761,12 @@ class ContactPage extends StatefulWidget {
 }
 
 class _ContactPageState extends State<ContactPage> {
+  @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/ContactPage');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -727,6 +796,12 @@ class LaundryPage extends StatefulWidget {
 
 class _LaundryPageState extends State<LaundryPage> {
   @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/LaundryPage');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _customAppBar(context),
@@ -755,6 +830,12 @@ class TailoringPage extends StatefulWidget {
 
 class _TailoringPageState extends State<TailoringPage> {
   @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/TailoringPage');
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _customAppBar(context),
@@ -782,6 +863,11 @@ class SneakleanPage extends StatefulWidget {
 }
 
 class _SneakleanPageState extends State<SneakleanPage> {
+  @override
+  void initState() {
+    super.initState();
+    NavigationService.setCurrentRoute('/SneakleanPage');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
