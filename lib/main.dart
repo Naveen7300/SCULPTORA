@@ -1,5 +1,9 @@
+// ~Naveen Jain
 // codex.naveenj@gmail.com
-// https://github.com/Naveen7300
+// https://github.com/Naveen7300/SCULPTORA_V2
+// ~Vraj Patel
+// vraj9patel.06@gmail.com
+// https://github.com/Vraj6355
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -73,7 +77,7 @@ PreferredSizeWidget _customAppBar(BuildContext context) {
               )
           ),
         ),
-        SizedBox(width: 5),
+        //SizedBox(width: 5),
         Padding(
           padding: EdgeInsets.only(top: 15), // Add top & right padding
           child: Column(
@@ -266,36 +270,36 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildButton(String label, VoidCallback onPressed) {
     return Container(
-      width: 200.0,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.green[400],
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30), // No rounded corners
+        width: 200.0,
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green[400],
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30), // No rounded corners
+            ),
+            padding: EdgeInsets.zero, // Remove default padding
           ),
-          padding: EdgeInsets.zero, // Remove default padding
-        ),
-        child: Center(
-          child: Text(
-            "LOGIN",
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white, // Text color over the image
-              shadows: [
-                Shadow(
-                  offset: Offset(1.0, 1.0),
-                  // Shadow for better readability
-                  blurRadius: 3.0,
-                  color: Colors.black,
-                ),
-              ],
+          child: Center(
+            child: Text(
+              "LOGIN",
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white, // Text color over the image
+                shadows: [
+                  Shadow(
+                    offset: Offset(1.0, 1.0),
+                    // Shadow for better readability
+                    blurRadius: 3.0,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-      )
+        )
     );
   }
 }
@@ -330,7 +334,7 @@ class _SignupPageState extends State<SignupPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: EdgeInsets.only(top: 20.0),
+                    padding: EdgeInsets.only(top: 20.0),
                     child: Image(
                       image: AssetImage('assets/Sculptora_Logo.png'),
                       height: 200,
@@ -668,20 +672,51 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "PROFILE",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 32,
-              fontWeight: FontWeight.bold
+      body: Stack(
+          children: [
+            Positioned(
+                top: 20.0,
+                left: 0.0,
+                right: 0.0,
+                child: Center(
+                  child: Text(
+                    "PROFILE",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline
+                    ),
+                  ),
+                )
             ),
-          ),
-        ),
+            Positioned(
+                top: 100.0,
+                left: 10.0,
+                right: 10.0,
+                child: Center(
+                    child: Text(
+                      '''Welcome to your Sculptora profile! This is your personal hub where you can manage your account and customize your preferences. Whether you're using our laundry, tailoring, or sneaker cleaning services, everything is streamlined to offer you a hassle-free experience.
+\nIn your profile, you can:
+\n➤ Update your personal information
+➤ Set and manage your delivery addresses
+➤ Save your preferred payment methods
+➤ Adjust your notification settings and preferences
+\nWith Sculptora, you’re always in control of your experience. Easily manage your information and enjoy quick access to all of our services.''',
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                    )
+                )
+            )
+          ]
       ),
     );
   }
@@ -702,20 +737,51 @@ class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "ORDERS",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
+      body: Stack(
+          children: [
+            Positioned(
+                top: 20.0,
+                left: 0.0,
+                right: 0.0,
+                child: Center(
+                  child: Text(
+                    "ORDERS",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline
+                    ),
+                  ),
+                )
             ),
-          ),
-        ),
+            Positioned(
+                top: 100.0,
+                left: 10.0,
+                right: 10.0,
+                child: Center(
+                    child: Text(
+                      '''Keep track of all your laundry, tailoring, and sneaker cleaning services in one place with our easy-to-use Orders section. Here, you can monitor the status of your ongoing services and review your service history.
+\nIn the Orders section, you can:
+\n➤ View the status of current services (pending, in progress, or 
+     completed)
+➤ Review past orders and payment details
+➤ Reschedule or cancel orders if needed
+\nStay updated and in control with real-time tracking for all your services. At Sculptora, we make sure everything is organized and transparent for a seamless experience.''',
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                    )
+                )
+            )
+          ]
       ),
     );
   }
@@ -736,20 +802,47 @@ class _AboutUsPageState extends State<AboutUsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "ABOUT US",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
-            ),
+      body: Stack(
+        children: [
+          Positioned(
+            top: 20.0,
+            left: 0.0,
+            right: 0.0,
+            child: Center(
+              child: Text(
+                "ABOUT US",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.underline
+                ),
+              ),
+            )
           ),
-        ),
+          Positioned(
+            top: 100.0,
+              left: 10.0,
+              right: 10.0,
+              child: Center(
+                child: Text(
+                    '''Welcome to Sculptora, your one-stop solution for laundry, tailoring, and sneaker cleaning services at unbeatable prices! We understand the importance of convenience in your busy life, which is why we’ve brought together essential services under one roof, making it easier than ever to look and feel your best without breaking the bank.
+\nOur app is designed to offer high-quality services at lower rates than market values, ensuring that you get value for money without compromising on quality. Whether you need fresh, clean clothes, perfectly tailored outfits, or sneakers that look brand new, we've got you covered.
+\nExperience hassle-free services with Sculptora - because we believe you deserve more for less.''',
+                  maxLines: null,
+                  overflow: TextOverflow.visible,
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14
+                  ),
+                )
+              )
+          )
+        ]
       ),
     );
   }
@@ -770,20 +863,50 @@ class _ContactPageState extends State<ContactPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "CONTACT",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
+      body: Stack(
+          children: [
+            Positioned(
+                top: 20.0,
+                left: 0.0,
+                right: 0.0,
+                child: Center(
+                  child: Text(
+                    "CONTACT PAGE",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline
+                    ),
+                  ),
+                )
             ),
-          ),
-        ),
+            Positioned(
+                top: 100.0,
+                left: 10.0,
+                right: 10.0,
+                child: Center(
+                    child: Text(
+                      '''We’re here to help! If you have any questions, feedback, or need assistance with our services, feel free to reach out. At Sculptora, customer satisfaction is our top priority, and we’re always ready to assist you.
+\nYou can contact us through:
+\nEmail: services@sculptora.com
+Phone: 6355906727 / 7300310248
+Live Chat: Available in-app for instant support
+\nOur team is available 24X7 and will respond promptly to ensure you have the best experience with our laundry, tailoring, and sneaker cleaning services.''',
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                    )
+                )
+            )
+          ]
       ),
     );
   }
@@ -804,20 +927,51 @@ class _LaundryPageState extends State<LaundryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "LAUNDRY",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
+      body: Stack(
+          children: [
+            Positioned(
+                top: 20.0,
+                left: 0.0,
+                right: 0.0,
+                child: Center(
+                  child: Text(
+                    "LAUNDRY",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline
+                    ),
+                  ),
+                )
             ),
-          ),
-        ),
+            Positioned(
+                top: 100.0,
+                left: 10.0,
+                right: 10.0,
+                child: Center(
+                    child: Text(
+                      '''Need fresh, clean clothes without the hassle? Sculptora offers reliable laundry services at unbeatable prices. We take the stress out of laundry day by providing high-quality cleaning with fast pickups and deliveries—right at your doorstep.
+\nOur laundry service includes:
+\n➤ Wash, dry, and fold for everyday clothes
+➤ Special care for delicate fabrics like silk, wool, and more
+➤ Stain removal for tough, hard-to-clean spots
+➤ Fast turnaround times to suit your schedule
+\nSimply schedule a pickup, and we’ll handle the rest. With Sculptora, you get more than just clean clothes—you get convenience and peace of mind, all at a fraction of the cost of other services.''',
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                    )
+                )
+            )
+          ]
       ),
     );
   }
@@ -838,20 +992,51 @@ class _TailoringPageState extends State<TailoringPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "TAILORING",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
+      body: Stack(
+          children: [
+            Positioned(
+                top: 20.0,
+                left: 0.0,
+                right: 0.0,
+                child: Center(
+                  child: Text(
+                    "TAILORING",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline
+                    ),
+                  ),
+                )
             ),
-          ),
-        ),
+            Positioned(
+                top: 100.0,
+                left: 10.0,
+                right: 10.0,
+                child: Center(
+                    child: Text(
+                      '''Need alterations or custom tailoring? Sculptora offers expert tailoring services designed to fit your needs and lifestyle. Whether it’s minor adjustments or full alterations, we ensure your clothes fit perfectly—all with the ease of scheduling from your phone.
+\nOur tailoring services include:
+\n➤ Alterations for dresses, suits, shirts, and more
+➤ Hemming, repairs, and adjustments for a flawless fit
+➤ Custom tailoring for that personalized touch
+➤ Quick turnaround times to match your schedule
+\nWith Sculptora, getting perfectly fitted clothes is easier than ever. Simply schedule a pickup, and our expert tailors will handle the rest. Enjoy tailor-made convenience, all at competitive prices.''',
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                    )
+                )
+            )
+          ]
       ),
     );
   }
@@ -871,20 +1056,53 @@ class _SneakleanPageState extends State<SneakleanPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightBlue[100],
       appBar: _customAppBar(context),
-      body: Container(
-        color: Colors.lightBlue[100],
-        child: Center(
-          child: Text(
-            "SNEAKLEAN",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 32,
-                fontWeight: FontWeight.bold
+      body: Stack(
+          children: [
+            Positioned(
+                top: 20.0,
+                left: 0.0,
+                right: 0.0,
+                child: Center(
+                  child: Text(
+                    "SNEAKLEAN",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline
+                    ),
+                  ),
+                )
             ),
-          ),
-        ),
+            Positioned(
+                top: 100.0,
+                left: 10.0,
+                right: 10.0,
+                child: Center(
+                    child: Text(
+                      '''Bring your favorite sneakers back to life with Sculptora professional sneaker cleaning service! We specialize in cleaning and restoring all types of sneakers, ensuring they look as good as new without the hassle of DIY cleaning.
+\nOur sneakers cleaning services include:
+\n➤ Deep cleaning for all types of sneakers (leather, suede,
+     canvas, etc.)
+➤ Stain and dirt removal to restore original color and texture
+➤ Sole and upper cleaning for a complete refresh
+➤ Careful handling to ensure your sneakers are cleaned without
+     damage
+\nWhether it’s your everyday kicks or limited-edition pairs, our sneaker cleaning experts will handle them with care. Schedule a pickup, and we’ll make sure your sneakers are returned looking fresh and spotless—all at competitive rates.''',
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14
+                      ),
+                    )
+                )
+            )
+          ]
       ),
     );
   }
