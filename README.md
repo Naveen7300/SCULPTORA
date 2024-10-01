@@ -16,4 +16,4 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 #APK Build
-- app-release.apk
+https://github.com/Naveen7300/SCULPTORA/blob/main/app-release.apk
