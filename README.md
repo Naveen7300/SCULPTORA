@@ -17,4 +17,4 @@ samples, guidance on mobile development, and a full API reference.
 
 #APK Build
 
-- [SCULPTORA.apk](https://github.com/Naveen7300/SCULPTORA/blob/main/)
+- [SCULPTORA v1.0.apk](https://github.com/Naveen7300/SCULPTORA/blob/main/)
